@@ -43,7 +43,6 @@ parastrucks/                 (branch: main)
 ├── switch-mobility.html     Brand page — Switch electric vehicles
 ├── hd-hyundai.html          Brand page — HD Hyundai construction equipment
 ├── emi-calculator.html      EMI calculator (hardcoded AL prices)
-├── bus-price-calculator.html  INTERNAL pricing tool (not in sitemap, no SEO)
 ├── outlets.html             11 outlet locations (data in inline JS)
 ├── contact.html             Contact / enquiry page
 ├── careers.html             Careers + 5 job postings (JobPosting structured data)
@@ -82,7 +81,6 @@ parastrucks/                 (branch: main)
 | `switch-mobility.html` | Switch EV range | Electric buses/trucks (5 outlets) |
 | `hd-hyundai.html` | HD Hyundai CE range | Excavators, wheel loaders (4 outlets, Hisar 3S flagship) |
 | `emi-calculator.html` | Customer EMI tool | **`alVehicles`** + **`models`** JS arrays hold AL prices |
-| `bus-price-calculator.html` | **Internal** bus pricing tool | Bus chassis database in inline JS. Deliberately excluded from `sitemap.xml` and has no canonical/OG/structured-data tags. |
 | `outlets.html` | All 11 locations | **`outlets`** JS array (name, address, phone, brands) |
 | `contact.html` | Enquiry + contact channels | Phone, WhatsApp, email; mailto-based enquiry |
 | `careers.html` | Job listings | 5 postings, each with a `JobPosting` JSON-LD block and a JD-PDF link; apply via prefilled `mailto:` |
@@ -99,7 +97,6 @@ numbers come from:
   source PDFs are kept in [`pricelist/`](pricelist/)). They are **manually
   transcribed** into the site — there is no live feed. Prices appear in:
   - `emi-calculator.html` → `alVehicles` and `models` JS arrays.
-  - `bus-price-calculator.html` → inline bus-chassis database.
   - Featured prices on `index.html` / brand pages (inline HTML).
   - The latest transcription was the **April 2026 AL circular** (see CHANGELOG).
 - **Outlet data** (`outlets.html` → `outlets` array): names, addresses, phones,
@@ -127,8 +124,7 @@ If these need to change, search-and-replace across the `.html` files:
 
 ## 6. SEO setup
 
-- **`sitemap.xml`** — lists the 9 public pages (the internal bus calculator is
-  intentionally excluded). _Note: `lastmod` dates are static (`2026-03-22`) and
+- **`sitemap.xml`** — lists the 9 public pages. _Note: `lastmod` dates are static (`2026-03-22`) and
   are not auto-updated; refresh them when a page changes materially._
 - **`robots.txt`** — allows all crawlers and points to the sitemap.
 - **Per-page tags** — every public page has a `<title>`, meta description,
@@ -163,8 +159,7 @@ file in a browser (or run any static server, e.g. `python -m http.server`).
 
 - **Update vehicle prices** (new AL circular): drop the new circular PDF into
   `pricelist/`, then update the numbers in `emi-calculator.html`
-  (`alVehicles` / `models`), `bus-price-calculator.html` (chassis DB), and any
-  featured prices on `index.html` / brand pages. Add a CHANGELOG entry.
+  (`alVehicles` / `models`) and any featured prices on `index.html` / brand pages. Add a CHANGELOG entry.
 - **Add / change a job posting**: update the job card HTML **and** the matching
   `JobPosting` JSON-LD block in `careers.html`; add/replace the JD PDF in `jds/`.
   Required JSON-LD fields to keep valid: `title`, `description`, `datePosted`,
@@ -187,5 +182,7 @@ file in a browser (or run any static server, e.g. `python -m http.server`).
   tracked images or contain untracked working files. **Always `git add` the
   specific file(s) you changed; never `git add -A`/`git add .`,** or you may
   delete repo assets or push unrelated changes.
-- **`bus-price-calculator.html` is internal** — keep it out of the sitemap and
-  out of public navigation.
+- **No internal tools on this site.** It is public, and so is its source: a
+  password written in a page is readable by anyone. Staff tools live in the
+  portal behind its login (the bus calculator moved there; this site's copy
+  was removed on 2026-11-14).
