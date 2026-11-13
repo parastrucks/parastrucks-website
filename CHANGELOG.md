@@ -3,6 +3,14 @@
 All notable changes to the parastrucks.in website are recorded here.
 Newest first. Dates are the commit dates on the `main` (live) branch.
 
+## 2026-11-14
+
+### Removed
+- `bus-price-calculator.html` — the internal bus pricing tool. Its password
+  check ran in the browser with the password written in the page, so it never
+  kept anyone out. Staff use the Bus Calculator in the team portal, behind
+  its login. The page was not linked from any other page or the sitemap.
+
 ## 2026-06-28
 
 ### Added
